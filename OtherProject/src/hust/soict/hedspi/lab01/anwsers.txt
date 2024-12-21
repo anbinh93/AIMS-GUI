@@ -1,0 +1,14 @@
+Questions (Page 21):
+- What happens if users choose “Cancel”? (6.1)
+-> It will show message dialog "You've chosen: No", this is because when we click the button "Cancel", the variable option will be put to 
+CANCEL_OPTION, which has value 2. And for the "(option == JOptionPane.YES_OPTION ? "Yes" : "No")", any values other than "Yes" will be led
+to "No" branch
+- How to customize the options to users, e.g. only two options: “Yes” and “No”, OR “I do”
+and “I don’t” (Suggestion: Use Javadocs or using Eclipse/Netbean IDE help).
+-> We can create custom array containing "Yes" and "No" and pass it to showOptionDialog method: 
+```java
+    Object[] options = {"Yes", "No"};
+
+    int option = JOptionPane.showOptionDialog(null, "Do you want to change to the first class ticket?", 
+					"Choose Option", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+```

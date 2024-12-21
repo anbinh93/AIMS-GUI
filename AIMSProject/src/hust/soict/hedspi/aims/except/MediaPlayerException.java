@@ -1,9 +1,12 @@
 package hust.soict.hedspi.aims.except;
 
+import java.io.Serial;
+
 // Refactoring the class name to make it more descriptive
 public class MediaPlayerException extends Exception {
 
     // Extracted constant with a meaningful name
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public MediaPlayerException() {

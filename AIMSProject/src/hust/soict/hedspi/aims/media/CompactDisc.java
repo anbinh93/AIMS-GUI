@@ -1,10 +1,13 @@
 package hust.soict.hedspi.aims.media;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CompactDisc extends Disc implements Playable{
+import hust.soict.hedspi.aims.except.MediaPlayerException;
+
+public class CompactDisc extends Disc implements Playable {
     private String artist;
-    private ArrayList<Track> tracks = new ArrayList<Track>();
+    private List<Track> tracks = new ArrayList<>();
 
     public CompactDisc(int id, String title, String artist) {
         super(id, title);
@@ -24,44 +27,63 @@ public class CompactDisc extends Disc implements Playable{
     public String getArtist() {
         return artist;
     }
+
     public void addTrack(Track track) {
         if (tracks.contains(track)) {
             System.out.println("Track is already in the list");
-            return;
+        } else {
+            tracks.add(track);
+            System.out.println("Add track successfully");
         }
-        tracks.add(track);
-        System.out.println("Add track successfully");
     }
+
     public void removeTrack(Track track) {
-        if (!tracks.contains(track)) {
+        if (tracks.contains(track)) {
+            tracks.remove(track);
+            System.out.println("Remove track successfully");
+        } else {
             System.out.println("Track is not in the list");
-            return;
-        }
-        tracks.remove(track);
-        System.out.println("Remove track successfully");
-    }
-    public int getLength() {
-        int sum = 0;
-        for (Track track : tracks) {
-            sum += track.getLength();
-        }
-        return sum;
-    }
-    public void play() {
-        System.out.println("Playing CD: " + this.getTitle());
-        System.out.println("CD length: " + this.getLength());
-        for (Track track : tracks) {
-            track.play();
         }
     }
-    // id - CD - title - category - artist - tracks - length - cost
+
+    @Override
     public String toString() {
-        String tracks = "";
-        for (Track track : this.tracks) {
-            tracks += track.getTitle() + ", ";
+        StringBuilder tracksInfo = new StringBuilder();
+        for (Track track : tracks) {
+            tracksInfo.append(track.getTitle()).append(", ");
         }
-        //Remove the last ", "
-        tracks = tracks.substring(0, tracks.length() - 2);
-        return this.getId() + ". CD - " + this.getTitle() + " - " + this.getCategory() + " - " + this.getArtist() + " - " + tracks + " - " + this.getLength() + ": " + this.getCost() + "$";
+        if (tracksInfo.length() > 0) {
+            tracksInfo.setLength(tracksInfo.length() - 2); // Remove the last ", "
+        }
+        return String.format("%d. CD - %s - %s - %s - %s - %d: %.2f$",
+                             getId(), getTitle(), getCategory(), artist, tracksInfo, getLength(), getCost());
+    }
+
+    public int getLength() {
+        return tracks.stream().mapToInt(Track::getLength).sum();
+    }
+
+    @Override
+    public void play() throws MediaPlayerException {
+        if (getLength() > 0) {
+            System.out.println("Playing CD: " + getTitle());
+            for (Track track : tracks) {
+                track.play();
+            }
+        } else {
+            throw new MediaPlayerException("ERROR: CD length is non-positive");
+        }
+    }
+
+    public String playMedia() throws MediaPlayerException {
+        if (getLength() > 0) {
+            StringBuilder output = new StringBuilder("Playing CD: ").append(getTitle()).append("\n");
+            for (Track track : tracks) {
+                output.append(track.playMedia()).append("\n");
+            }
+            return output.toString();
+        } else {
+            throw new MediaPlayerException("ERROR: CD length is non-positive");
+        }
     }
 }

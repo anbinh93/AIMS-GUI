@@ -11,50 +11,47 @@
 
     <top>
         <HBox spacing="10.0" alignment="CENTER" BorderPane.alignment="CENTER">
-            <children>
-                <Label text="Cart" textFill="#004cff">
-                    <font>
-                        <Font size="50.0" />
-                    </font>
-                </Label>
-                <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnViewStore" text="View Store" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" onAction="#btnViewStorePressed" />
-            </children>
             <BorderPane.margin>
-                <Insets left="20.0" right="20.0" />
+                <Insets left="20.0" right="20.0"/>
             </BorderPane.margin>
+            <Label text="Cart" textFill="#004cff">
+                <font>
+                    <Font size="50.0"/>
+                </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnViewStore" text="View Store" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0"
+                    onAction="#btnViewStorePressed"/>
         </HBox>
     </top>
 
     <center>
         <VBox spacing="15.0" BorderPane.alignment="CENTER">
-            <children>
-                <HBox spacing="10.0" alignment="CENTER_LEFT" padding="10">
-                    <children>
-                        <Label text="Filter" />
-                        <TextField fx:id="tfFilter" HBox.hgrow="ALWAYS" />
-                        <RadioButton fx:id="radioBtnFilterId" text="By ID" selected="true" toggleGroup="$filterCategory" />
-                        <RadioButton fx:id="radioBtnFilterTitle" text="By Title" toggleGroup="$filterCategory" />
-                    </children>
-                </HBox>
-                <TableView fx:id="tblMedia" prefHeight="400.0">
-                    <columns>
-                        <TableColumn fx:id="colMediaId" text="ID" prefWidth="75.0" />
-                        <TableColumn fx:id="colMediaTitle" text="Title" prefWidth="200.0" />
-                        <TableColumn fx:id="colMediaCategory" text="Category" prefWidth="150.0" />
-                        <TableColumn fx:id="colMediaCost" text="Cost" prefWidth="100.0" />
-                    </columns>
-                </TableView>
-                <HBox spacing="20.0" alignment="TOP_RIGHT" padding="10">
-                    <children>
-                        <Button fx:id="btnPlay" text="Play" mnemonicParsing="false" prefWidth="80.0" onAction="#btnPlayPressed" />
-                        <Button fx:id="btnRemove" text="Remove" mnemonicParsing="false" prefWidth="80.0" onAction="#btnRemovePressed" />
-                    </children>
-                </HBox>
-            </children>
             <BorderPane.margin>
-                <Insets left="20.0" right="20.0" />
+                <Insets left="20.0" right="20.0"/>
             </BorderPane.margin>
+            <HBox spacing="10.0" alignment="CENTER_LEFT" padding="10">
+                <Label text="Filter"/>
+                <TextField fx:id="tfFilter" HBox.hgrow="ALWAYS"/>
+                <RadioButton fx:id="radioBtnFilterId" text="By ID" selected="true" toggleGroup="$filterCategory"/>
+                <RadioButton fx:id="radioBtnFilterTitle" text="By Title" toggleGroup="$filterCategory"/>
+            </HBox>
+            <TableView fx:id="tblMedia" prefHeight="400.0">
+                <columns>
+                    <TableColumn fx:id="colMediaId" text="ID" prefWidth="75.0"/>
+                    <TableColumn fx:id="colMediaTitle" text="Title" prefWidth="200.0"/>
+                    <TableColumn fx:id="colMediaCategory" text="Category" prefWidth="150.0"/>
+                    <TableColumn fx:id="colMediaCost" text="Cost" prefWidth="100.0"/>
+                </columns>
+            </TableView>
+            <HBox spacing="20.0" alignment="TOP_RIGHT" padding="10">
+                <children>
+                    <Button fx:id="btnPlay" text="Play" mnemonicParsing="false" prefWidth="80.0"
+                            onAction="#btnPlayPressed"/>
+                    <Button fx:id="btnRemove" text="Remove" mnemonicParsing="false" prefWidth="80.0"
+                            onAction="#btnRemovePressed"/>
+                </children>
+            </HBox>
         </VBox>
     </center>
 
